@@ -1,6 +1,7 @@
 package spring.com.vendasroger.domain.resouce;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,9 @@ public class BaseService<E extends BaseEntity, D extends BaseDTO<E>> {
 	protected BaseRepository<E> repository;
 	
 	
-	public Page<E> findAll(Pageable pageable, E filter) {
-		ExampleMatcher matcher = ExampleMatcher
-                .matching()
-                .withIgnoreNullValues()
-                .withIgnoreCase()
-                .withStringMatcher(
-                        ExampleMatcher.StringMatcher.CONTAINING ); 
-
-		Example<E> example = Example.of(filter, matcher);
-		return repository.findAll(example, pageable);
+	public List<E> findAll() {
+	
+		return repository.findAll();
 	}
 	
 	public E getOne(Long id) {

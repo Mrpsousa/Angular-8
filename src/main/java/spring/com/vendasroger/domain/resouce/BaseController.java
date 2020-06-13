@@ -1,5 +1,7 @@
 package spring.com.vendasroger.domain.resouce;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -25,14 +27,14 @@ public class BaseController <E extends BaseEntity, D extends BaseDTO<E>, S exten
 	@Autowired
 	private S service;
 	
-	  @GetMapping
-		public Page<E> index(@PageableDefault Pageable pageable, E filter){
-			return service.findAll(pageable, filter);	
+	 @GetMapping
+		public List<E> index(){
+			return service.findAll( );	
 		}
 	  
 	  @PostMapping
 	  @Transactional
-	  public ResponseEntity<E> store(@RequestBody D dto) {
+	  public ResponseEntity<E> store( D dto) {
 				E entity = service.store(dto);
 				return ResponseEntity.status(HttpStatus.CREATED).body(entity);			
 			
