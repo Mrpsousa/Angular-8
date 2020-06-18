@@ -16,11 +16,10 @@ import spring.com.vendasroger.domain.resouce.BaseEntity;
 @Table(name = "usuario")
 public class Usuario extends BaseEntity {
 
-	@Column(name = "nome")
-	private String nome;
+	private String username;
 	
-	@Column(name = "cpf")
-	private String cpf;
+	
+	private String senha;
 
 	@Column(name = "roles")
 	private String roles;

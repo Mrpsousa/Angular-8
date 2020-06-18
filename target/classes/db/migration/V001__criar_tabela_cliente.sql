@@ -1,13 +1,13 @@
 CREATE TABLE usuario (
 	id integer primary key AUTO_INCREMENT,
-	nome varchar(400),	
-	cpf varchar(11),
-	roles varchar (20),
+	username varchar(400),	
+	senha varchar(50),
+	admin BOOLEAN,
 	created_at TIMESTAMP DEFAULT NOW()
 );
 
 
-INSERT INTO usuario (id, nome, cpf, roles, created_at) VALUES (1,'roger','02283845456','admin', null);
+INSERT INTO usuario (id, username, senha, admin, created_at) VALUES (1,'roger','Senha@2020','1', null);
 
 
 CREATE TABLE produto (

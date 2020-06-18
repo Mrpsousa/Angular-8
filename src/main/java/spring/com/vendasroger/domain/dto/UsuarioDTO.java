@@ -11,17 +11,17 @@ import spring.com.vendasroger.domain.resouce.BaseDTO;
 public class UsuarioDTO implements BaseDTO<Usuario> {
 
 
-	private String nome;
+	private String username;
 	
-	private String cpf;
+	private String senha;
 	
 	private String roles;
 	
 	@Override
 	public Usuario getEntity() {
 		Usuario usuario = new Usuario();
-		usuario.setNome(nome);
-		usuario.setCpf(cpf);
+		usuario.setUsername(username);
+		usuario.setSenha(senha);
 		usuario.setRoles(roles);
 		return usuario;
 	}	
