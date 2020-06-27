@@ -1,0 +1,46 @@
+
+CREATE TABLE cliente (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	nome VARCHAR(100) NOT NULL,
+	deleted_at TIMESTAMP NULL, 
+	created_at TIMESTAMP NULL DEFAULT NOW(), 
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE produto (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	descricao VARCHAR(100) NOT NULL,
+    preco_unitario NUMERIC(20,5),
+	deleted_at TIMESTAMP NULL, 
+	created_at TIMESTAMP NULL DEFAULT NOW(), 
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*INSERT INTO produto (id, descricao) VALUES
+(1,'produtoX');*/
+
+
+CREATE TABLE pedido (
+	id BIGINT NOT NULL  AUTO_INCREMENT,
+    cliente_id BIGINT NOT NULL,
+    data_pedido TIMESTAMP NULL DEFAULT NOW(),
+	total NUMERIC(20,5),
+	deleted_at TIMESTAMP NULL, 
+	created_at TIMESTAMP NULL DEFAULT NOW(), 
+	PRIMARY KEY (id),
+    FOREIGN KEY (cliente_id) REFERENCES cliente(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE item_pedido (
+	id BIGINT NOT NULL  AUTO_INCREMENT,
+    produto_id BIGINT NOT NULL,
+	pedido_id BIGINT NOT NULL,
+	quantidade NUMERIC(20,5),
+	deleted_at TIMESTAMP NULL, 
+	created_at TIMESTAMP NULL DEFAULT NOW(), 
+	PRIMARY KEY (id),
+    FOREIGN KEY (produto_id) REFERENCES produto(id) ON DELETE CASCADE,
+	FOREIGN KEY (pedido_id) REFERENCES pedido(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
