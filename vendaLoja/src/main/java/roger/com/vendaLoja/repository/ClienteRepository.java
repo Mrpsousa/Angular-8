@@ -2,7 +2,7 @@ package roger.com.vendaLoja.repository;
 
 import org.springframework.stereotype.Repository;
 
-import roger.com.vendaLoja.models.Cliente;
+import roger.com.vendaLoja.entity.Cliente;
 
 @Repository
 public class ClienteRepository {

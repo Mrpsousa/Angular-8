@@ -3,7 +3,7 @@ package roger.com.vendaLoja.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import roger.com.vendaLoja.models.Cliente;
+import roger.com.vendaLoja.entity.Cliente;
 import roger.com.vendaLoja.repository.ClienteRepository;
 
 @Service

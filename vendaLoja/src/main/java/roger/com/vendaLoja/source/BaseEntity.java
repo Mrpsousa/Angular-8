@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @MappedSuperclass
-public class BaseModel {
+public class BaseEntity {
 	
 
 		@Id
