@@ -32,6 +32,8 @@ public class BaseEntity {
 		@Column(name = "deleted_at")
 		protected LocalDateTime deletedAt;
 
+
+
 //		public Long getId() {
 //			return id;
 //		}
