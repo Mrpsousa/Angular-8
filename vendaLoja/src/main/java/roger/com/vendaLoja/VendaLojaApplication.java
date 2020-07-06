@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class VendaLojaApplication {
 
-	@GetMapping("/hello")
-	public String helloworld() {
-		return "Hello";
-	}
+//	@GetMapping("/hello")
+//	public String helloworld() {
+//		return "Hello";
+//	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(VendaLojaApplication.class, args);

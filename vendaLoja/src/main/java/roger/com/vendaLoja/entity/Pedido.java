@@ -25,15 +25,13 @@ public class Pedido extends BaseEntity{
 	@Column(name = "cliente_id", nullable=false)
 	private Long clienteId;
 	
+	@Column(name = "produto_id", nullable=false)
+	private Long produtoId;
+	
 	@Column(name = "data_pedido", nullable=false)
 	private LocalDate dataPedido;
 	
 	private BigDecimal total;
+
 	
-	@ManyToOne(cascade = CascadeType.ALL) //Many "pedidos" to one "Cliente" - 'Many' ref to current entity, 'ToOne' ref another entity  @OneToMany or @ManyToMany
-	@JoinColumn(name = "cliente_id", referencedColumnName = "id", insertable=false, updatable=false)
-	private Cliente cliente;
-	
-	@OneToMany(mappedBy = "pedido")
-	private List<ItemPedido> itens;
 }

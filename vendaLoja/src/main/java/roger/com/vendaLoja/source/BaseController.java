@@ -17,19 +17,20 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 
-@RestController
 public class BaseController<E extends BaseEntity, S extends BaseService<E>> {
 	
 	@Autowired
 	protected S service;
 	 
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public E getOneById(@PathVariable Long id) {
-		try {
-			return service.getOne(id);	
-		} catch (Exception ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não atualizado,erro:"+ ex);
-		}
+//		try {
+//			return service.getOne(id);	
+//		} catch (Exception ex) {
+//			//throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Entity não encontrada");
+//			
+//		}
+		return service.getOne(id);	
 	}
 	
 	@GetMapping
@@ -37,7 +38,7 @@ public class BaseController<E extends BaseEntity, S extends BaseService<E>> {
 		try {
 			return service.getAll();
 		} catch (Exception ex) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não atualizado,erro:"+ ex);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Entities não encontradas");
 		}
 	}
 	
@@ -49,27 +50,28 @@ public class BaseController<E extends BaseEntity, S extends BaseService<E>> {
 		try {
 			return service.save(entity);
 		} catch (Exception ex) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cliente não atualizado,erro:"+ ex);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Entity não atualizada");
 		}
+		
 	}
 	
 	@DeleteMapping("{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ResponseStatus(HttpStatus.ACCEPTED)
 	public void delete(@PathVariable Long id) {
 		try {
 			 service.delete(id);	
 		} catch (Exception ex) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cliente não atualizado,erro:"+ ex);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Entity não deletada");
 		}
 	}
 	
 	@PutMapping("{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable Long id,  @RequestBody  E entity) {
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public E update(@PathVariable Long id,  @RequestBody  E entity) {
 		try {
-			 service.upadate(id, entity);	
+			return service.upadate(id, entity);	
 		} catch (Exception ex) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Cliente não atualizado,erro:"+ ex);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Entity não atualizada");
 		}
 	}
 	

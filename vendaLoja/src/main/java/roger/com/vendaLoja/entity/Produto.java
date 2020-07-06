@@ -13,11 +13,12 @@ import roger.com.vendaLoja.source.BaseEntity;
 @Entity
 @Setter
 @Getter
-@Table(name="produto")
+@Table(name = "produto")
 public class Produto extends BaseEntity{
 
-	private String descricao;
-	
-	@Column(name="preco_unitario")
-	private BigDecimal precoUnitario;
+	    private String descricao;
+
+	    @Column(name = "preco_unitario")
+	    private BigDecimal preco;
+
 }

@@ -1,44 +1,37 @@
-CREATE TABLE cliente (
-	id BIGINT NOT NULL AUTO_INCREMENT,
-	nome VARCHAR(100) NOT NULL,
-	deleted_at TIMESTAMP NULL, 
-	created_at TIMESTAMP NULL DEFAULT NOW(), 
+ CREATE TABLE PEDIDO (
+    id INTEGER AUTO_INCREMENT,
+    CLIENTE_ID INTEGER,
+    PRODUTO_ID INTEGER,
+    DATA_PEDIDO TIMESTAMP NULL DEFAULT NOW(),
+    TOTAL NUMERIC(20,2),
+    created_at TIMESTAMP NULL DEFAULT NOW(),
     PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
+ 
+ INSERT INTO pedido (id, cliente_id, produto_id, data_pedido, total, created_at) VALUES
+(1, 1, 1, null, 123, null);
+
+CREATE TABLE CLIENTE (
+    ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    PEDIDO_ID INTEGER, 
+    NOME VARCHAR(100),
+    created_at TIMESTAMP NULL DEFAULT NOW(),
+    FOREIGN KEY (PEDIDO_ID) REFERENCES PEDIDO(id) ON DELETE CASCADE
+);
+
+CREATE TABLE PRODUTO (
+    ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    DESCRICAO VARCHAR(100),
+    PRECO_UNITARIO NUMERIC(20,2),
+    created_at TIMESTAMP NULL DEFAULT NOW()
+);
 
 
-CREATE TABLE produto (
-	id BIGINT NOT NULL AUTO_INCREMENT,
-	descricao VARCHAR(100) NOT NULL,
-    preco_unitario NUMERIC(20,5),
-	deleted_at TIMESTAMP NULL, 
-	created_at TIMESTAMP NULL DEFAULT NOW(), 
-    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*INSERT INTO produto (id, descricao) VALUES
-(1,'produtoX');*/
 
 
-CREATE TABLE pedido (
-	id BIGINT NOT NULL  AUTO_INCREMENT,
-    cliente_id BIGINT NOT NULL,
-    data_pedido TIMESTAMP NULL DEFAULT NOW(),
-	total NUMERIC(20,5),
-	deleted_at TIMESTAMP NULL, 
-	created_at TIMESTAMP NULL DEFAULT NOW(), 
-	PRIMARY KEY (id),
-    FOREIGN KEY (cliente_id) REFERENCES cliente(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO produto (id, descricao, preco_unitario, created_at) VALUES
+(1,'produto X', 323, null);
 
-CREATE TABLE item_pedido (
-	id BIGINT NOT NULL  AUTO_INCREMENT,
-    produto_id BIGINT NOT NULL,
-	pedido_id BIGINT NOT NULL,
-	quantidade NUMERIC(20,5),
-	deleted_at TIMESTAMP NULL, 
-	created_at TIMESTAMP NULL DEFAULT NOW(), 
-	PRIMARY KEY (id),
-    FOREIGN KEY (produto_id) REFERENCES produto(id) ON DELETE CASCADE,
-	FOREIGN KEY (pedido_id) REFERENCES pedido(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO cliente (id, pedido_id, nome, created_at) VALUES
+(1, 1, 'proger', null);
