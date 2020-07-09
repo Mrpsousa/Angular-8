@@ -20,21 +20,15 @@ import roger.com.vendaLoja.source.BaseEntity;
 @Table(name="item_pedido")
 public class ItemPedido extends BaseEntity{
 
-	@Column(name = "produto_id", nullable=false)
-	private Long produtoId;
-	
-	@Column(name = "pedido_id", nullable=false)
-	private Long pedidoId;
-	
-	private BigDecimal quantidade;
+	   @ManyToOne
+	    @JoinColumn(name = "pedido_id")
+	    private Pedido pedido;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "produto_id", referencedColumnName = "id", insertable=false, updatable=false)
-	private Produto produto;
-	
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pedido_id", referencedColumnName = "id", insertable=false, updatable=false)
-	private Pedido pedido;
+	    @ManyToOne
+	    @JoinColumn(name = "produto_id")
+	    private Produto produto;
+
+	    @Column
+	    private Long quantidade;
 	
 }
