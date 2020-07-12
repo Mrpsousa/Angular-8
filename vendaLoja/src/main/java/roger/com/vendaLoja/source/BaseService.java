@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-
-@Service
-public class BaseService<E extends BaseEntity> {
+public class BaseService<E extends BaseEntity, D extends BaseDTO<E>> {
 	
 	@Autowired
 	private BaseRepository<E> repository;
@@ -30,17 +28,20 @@ public class BaseService<E extends BaseEntity> {
 	}
    
     
-    public E save(E persisted) {
-    	persisted.setCreatedAt(LocalDateTime.now());
-		repository.save(persisted);
-		return persisted;
-	}
+    public E store(D dto) {
+  		E entity = dto.getEntity();
+  		entity.setCreatedAt(LocalDateTime.now());
+  		repository.save(entity);
+  		return entity;
+  	}
     
-    
-    public E upadate(long id, E newEntity) {
+    //olhar com calma depois
+    public E upadate(long id, D dto ) {
 		Optional<E> oldEntity = repository.findById(id);
+		
 		if(oldEntity.isPresent()) {
 			E auxEntity =  oldEntity.get();
+			E newEntity = dto.getEntity();
 			newEntity.setId(id);
 			newEntity.setCreatedAt(auxEntity.getCreatedAt());
 			auxEntity = repository.save(newEntity);

@@ -16,7 +16,7 @@ import roger.com.vendaLoja.source.BaseEntity;
 @Table(name = "produto")
 public class Produto extends BaseEntity{
 
-	  @Column(name = "descricao")
+	    @Column(name = "descricao")
 	    private String descricao;
 
 	    @Column(name = "preco_unitario")

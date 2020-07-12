@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 
-public class BaseController<E extends BaseEntity, S extends BaseService<E>> {
+public class BaseController<E extends BaseEntity, D extends BaseDTO<E>, S extends BaseService<E, D>> {
 	
 	@Autowired
 	protected S service;
@@ -46,11 +46,12 @@ public class BaseController<E extends BaseEntity, S extends BaseService<E>> {
 		
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public E save(E entity) {
-		try {
-			return service.save(entity);
+	public E save(@RequestBody D dto) {
+		try { 
+			E entity = service.store(dto);
+			return entity;
 		} catch (Exception ex) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Entity não atualizada");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Entity não salva");
 		}
 		
 	}
@@ -67,9 +68,9 @@ public class BaseController<E extends BaseEntity, S extends BaseService<E>> {
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public E update(@PathVariable Long id,  @RequestBody  E entity) {
+	public E update(@PathVariable Long id,  @RequestBody  D dto) {
 		try {
-			return service.upadate(id, entity);	
+			return service.upadate(id, dto);	
 		} catch (Exception ex) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Entity não atualizada");
 		}

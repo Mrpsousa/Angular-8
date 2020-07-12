@@ -13,8 +13,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
 @MappedSuperclass
 public class BaseEntity {
 	
@@ -27,6 +25,23 @@ public class BaseEntity {
 		@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 		@Column(name = "created_at")
 		protected LocalDateTime createdAt;
+		
+
+		public Long getId() {
+			return id;
+		}
+
+		public void setId(Long id) {
+			this.id = id;
+		}
+		public LocalDateTime getCreatedAt() {
+			return createdAt;
+		}
+
+		public void setCreatedAt(LocalDateTime createdAt) {
+			this.createdAt = createdAt;
+		}
+
 		
 
 }

@@ -21,7 +21,7 @@ import roger.com.vendaLoja.source.BaseEntity;
 @Table(name = "cliente")
 public class Cliente extends BaseEntity {
 
-	    @Column(name = "nome", length = 100)
+	  
 	    private String nome;
 
 	    @JsonIgnore

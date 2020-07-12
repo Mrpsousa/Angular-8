@@ -1,4 +1,4 @@
-package roger.com.vendaLoja.entity;
+package roger.com.vendaLoja.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -8,11 +8,11 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class PedidoDTO {
+public class PedidosDTO {
 	
 	private Long cliente;
 	private BigDecimal total;
-	private List<ItemPedidoDTO> itens;
+	private List<ItemPedidosDTO> itens;
 		
 
 }
