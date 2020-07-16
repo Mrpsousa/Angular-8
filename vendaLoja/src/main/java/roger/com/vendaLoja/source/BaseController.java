@@ -3,6 +3,8 @@ package roger.com.vendaLoja.source;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 
@@ -24,13 +25,13 @@ public class BaseController<E extends BaseEntity, D extends BaseDTO<E>, S extend
 	 
 	@GetMapping("/{id}")
 	public E getOneById(@PathVariable Long id) {
-//		try {
-//			return service.getOne(id);	
-//		} catch (Exception ex) {
-//			//throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Entity não encontrada");
-//			
-//		}
-		return service.getOne(id);	
+		try {
+			return service.getOne(id);	
+		} catch (Exception ex) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Entity não encontrada");
+			
+		}
+		//return service.getOne(id);	
 	}
 	
 	@GetMapping
@@ -46,7 +47,7 @@ public class BaseController<E extends BaseEntity, D extends BaseDTO<E>, S extend
 		
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public E save(@RequestBody D dto) {
+	public E save(@RequestBody @Valid D dto ) {
 		try { 
 			E entity = service.store(dto);
 			return entity;

@@ -13,16 +13,13 @@ CREATE TABLE PRODUTO (
 
 CREATE TABLE PEDIDO (
     ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-    CLIENTE_ID INTEGER REFERENCES CLIENTE (ID),
-    DATA_PEDIDO TIMESTAMP,
+    CLIENTE_ID INTEGER,
+	PRODUTO_ID INTEGER,
     TOTAL NUMERIC(20,2),
+    DATA_PEDIDO TIMESTAMP,
     created_at TIMESTAMP NULL DEFAULT NOW()
 );
 
-CREATE TABLE ITEM_PEDIDO (
-    ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-    PEDIDO_ID INTEGER REFERENCES PEDIDO (ID),
-    PRODUTO_ID INTEGER REFERENCES PRODUTO (ID),
-    QUANTIDADE INTEGER,
-    created_at TIMESTAMP NULL DEFAULT NOW()
-);
+INSERT INTO CLIENTE (id, nome, created_at) VALUES (1, 'roger', null), (2, 'marcos', null);
+INSERT INTO PRODUTO (id, descricao, preco_unitario, created_at) VALUES (1, 'tv', 123, null),(2, 'radio', 321, null);
+INSERT INTO PEDIDO (id, cliente_id, produto_id, total, data_pedido, created_at) VALUES (1, 1, 1, 4, null, null), (2, 2, 2, 3, null, null);

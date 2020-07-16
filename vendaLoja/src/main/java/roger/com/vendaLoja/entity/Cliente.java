@@ -1,14 +1,8 @@
 package roger.com.vendaLoja.entity;
 
-import java.util.Set;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,12 +15,7 @@ import roger.com.vendaLoja.source.BaseEntity;
 @Table(name = "cliente")
 public class Cliente extends BaseEntity {
 
-	  
+		@NotNull(message = "Campo 'nome' é obrigatório.")
 	    private String nome;
-
-	    @JsonIgnore
-	    @OneToMany( mappedBy = "cliente" , fetch = FetchType.LAZY )
-	    private Set<Pedido> pedidos;
-
 	 
 }
